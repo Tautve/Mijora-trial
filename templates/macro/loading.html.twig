@@ -1,0 +1,9 @@
+{% macro loading(text = 'Kraunama...') %}
+    <div id="spinner" class="row justify-content-center">
+        <div class="text-center">
+            &nbsp;&nbsp;<b>{{ text }}</b>
+        </div>
+        <div class="spinner-border justify-content-center mb-4 col-xxl-12" role="status">
+        </div>
+    </div>
+{% endmacro %}

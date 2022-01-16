@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% from 'macro/form_fields.html.twig' import renderCustomformField %}
+    {% from 'macro/loading.html.twig' import loading %}
+
+    <div class="container">
+        <div class="text-center main-title">Paštomatų sąrašas</div>
+
+        {# set filterForm attributes #}
+        {% set widgetAttr = {'class': 'form-control py-1'} %}
+        {% set labelAttr = {'class': 'small mb-1'} %}
+        {% set col2 = 'col-xl-2 mb-2' %}
+
+        {# sub header #}
+        <div class="sub-header" style="display:none">
+            {{ form_start(filterForm, {'novalidate': 'novalidate'}) }}
+
+            <div class="row mb-3">
+                {{ renderCustomformField(filterForm.zipCode,
+                    true, widgetAttr, labelAttr, col2) }}
+
+                {{ renderCustomformField(filterForm.name,
+                    true, widgetAttr, labelAttr, col2) }}
+
+                {{ renderCustomformField(filterForm.address,
+                    true, widgetAttr, labelAttr, col2) }}
+            </div>
+
+            {% if omnivaPostMachines is not empty %}
+                <a class="btn btn-success btn-sm btn-export pull-right py-2" href="{{ path('post_machines_export', {filter}) }}">
+                    <i class="fa fa-download">&nbsp;</i>
+                    Atsiųsti sąrašą (.xls)
+                </a>
+            {% endif %}
+
+            <button type="submit" class="btn btn-info btn-sm mb-5">Filtruoti</button>
+
+            {{ form_end(filterForm) }}
+        </div>
+
+        {# loading animation #}
+        {{ loading() }}
+
+        <table class="omnivaDatatable table table-hover"
+               style="display:none">
+            <thead>
+            <tr>
+                <th>Eil. nr.</th>
+                <th>ZIP kodas</th>
+                <th>Pavadinimas</th>
+                <th>Pilnas adresas</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for postMachine in omnivaPostMachines %}
+                <tr onclick="window.location='{{ path('post_machine_show', {id: postMachine.id}) }}';">
+                    <td>{{ loop.index }}</td>
+                    <td>{{ postMachine.zipCode }}</td>
+                    <td>{{ postMachine.name }}</td>
+                    <td>
+                        {{ postMachine.fullAddress }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

@@ -8,3 +8,19 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> .DS_store ###
+.DS_store
+config/.DS_Store
+public/.DS_Store
+src/.DS_Store
+templates/.DS_Store
+###< .DS_Store ###
+
+.idea
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

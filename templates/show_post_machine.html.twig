@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% from 'macro/form_fields.html.twig' import renderCustomformField %}
+    {% from 'macro/buttons.html.twig' import goBackButton %}
+
+    <div class="container">
+        <div class="main-title text-center">Paštomato "{{ postMachine.name }}" detali informacija</div>
+
+        {{ form_start(postMachineForm, {'novalidate': 'novalidate'}) }}
+
+        {# set form attributes #}
+        {% set widgetAttr = {'class': 'form-control py-2'} %}
+        {% set labelAttr = {'class': 'small mb-1'} %}
+        {% set rowAttr = "row mb-3 d-flex justify-content-between align-items-end" %}
+        {% set col2 = 'col-xl-2 mb-3' %}
+
+        <div class="{{ rowAttr }}">
+            {{ renderCustomformField(postMachineForm.zipCode,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.type,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a0Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a1Name,
+                true, widgetAttr, labelAttr, col2) }}
+        </div>
+
+        <div class="{{ rowAttr }}">
+
+            {{ renderCustomformField(postMachineForm.a2Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a3Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a4Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a5Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a6Name,
+                true, widgetAttr, labelAttr, col2) }}
+        </div>
+
+        <div class="{{ rowAttr }}">
+
+            {{ renderCustomformField(postMachineForm.a7Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.a8Name,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.xCoordinate,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.yCoordinate,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.serviceHours,
+                true, widgetAttr, labelAttr, col2) }}
+        </div>
+
+        <div class="{{ rowAttr }}">
+
+            {{ renderCustomformField(postMachineForm.tempServiceHours,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.tempServiceHoursUntil,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.tempServiceHours2,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.tempServiceHours2Until,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.commentEst,
+                true, widgetAttr, labelAttr, col2) }}
+        </div>
+
+        <div class="{{ rowAttr }}">
+            {{ renderCustomformField(postMachineForm.commentEng,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.commentRus,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.commentLav,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.commentLit,
+                true, widgetAttr, labelAttr, col2) }}
+
+            {{ renderCustomformField(postMachineForm.modified,
+                true, widgetAttr, labelAttr, col2) }}
+        </div>
+
+         {{ form_end(postMachineForm) }}
+
+        {{ goBackButton(path('post_machines_show')) }}
+    </div>
+
+{% endblock %}

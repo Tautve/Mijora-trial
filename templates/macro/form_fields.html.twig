@@ -1,0 +1,15 @@
+{% macro renderCustomformField(variable, showError, widgetAttr, labelAttr, class) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {{ form_label(variable, null, {label_attr: (labelAttr is defined) ? labelAttr : {} }) }}
+            {{ form_widget(variable, {attr: (widgetAttr is defined) ? widgetAttr : {} }) }}
+            {{ form_help(variable) }}
+
+            {% if showError == true %}
+                <div>
+                    {{ form_errors(variable) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}

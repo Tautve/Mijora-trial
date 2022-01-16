@@ -1,0 +1,14 @@
+/* libraries */
+@import "~bootstrap";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+@import "~font-awesome/css/font-awesome.css";
+
+/* custom */
+@import "omniva.css";
+
+body {
+    padding-top: 5rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    background-color: white;
+}
