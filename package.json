@@ -5,7 +5,10 @@
     "datatables.net-bs4": "^1.11.3",
     "encore": "^0.0.30-beta",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.6.0"
+    "handlebars": "4.0.0",
+    "jquery": "^3.6.0",
+    "postcss": "8.2.13",
+    "uglify-js": "2.6.0"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^1.7.0",
