@@ -55,7 +55,7 @@
             </thead>
             <tbody>
             {% for postMachine in omnivaPostMachines %}
-                <tr onclick="window.location='{{ path('post_machine_show', {id: postMachine.id}) }}';">
+                <tr onclick="window.location='{{ path('post_machine_show', {id: postMachine.id}) }}'">
                     <td>{{ loop.index }}</td>
                     <td>{{ postMachine.zipCode }}</td>
                     <td>{{ postMachine.name }}</td>

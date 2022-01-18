@@ -20,29 +20,23 @@ class CreateCronCommand extends Command
         parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Creating crons');
 
-        $crons = [
-            [
+        $cron = [
                 'name' => 'DatabaseSynchronisation',
                 'command' => 'omniva:synchronise-database',
                 'schedule' => '30 22 * * *',
                 'description' => 'Synchronise database with external omniva post machines list',
                 'enabled' => 1
-            ],
         ];
 
-        foreach ($crons as $cron) {
             $commands = $this->em->getRepository(CronJob::class)->findBy([
                 'command' => $cron['command'],
             ]);
 
-            if (count($commands) > 0) {
-                continue;
-            }
-
+        if (count($commands) === 0) {
             $command = (new CronJob())
                 ->setName($cron['name'])
                 ->setCommand($cron['command'])
@@ -51,9 +45,8 @@ class CreateCronCommand extends Command
                 ->setEnabled($cron['enabled']);
 
             $this->em->persist($command);
+            $this->em->flush();
         }
-
-        $this->em->flush();
 
         $output->writeln('Done!');
 

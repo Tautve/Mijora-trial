@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OmnivaRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OmnivaRepository::class)]
@@ -13,13 +14,13 @@ class Omniva
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $zipCode;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $name;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $type;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -49,10 +50,10 @@ class Omniva
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $a8Name;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $xCoordinate;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $yCoordinate;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -381,12 +382,12 @@ class Omniva
         return $this;
     }
 
-    public function getModified(): ?\DateTimeInterface
+    public function getModified(): ?DateTimeInterface
     {
         return $this->modified;
     }
 
-    public function setModified(?\DateTimeInterface $modified): self
+    public function setModified(?DateTimeInterface $modified): self
     {
         $this->modified = $modified;
 

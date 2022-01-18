@@ -17,7 +17,6 @@ use Yectep\PhpSpreadsheetBundle\Factory;
 #[Route('/omniva')]
 class OmnivaController extends AbstractController
 {
-
     public function __construct(
         private OmnivaRepository $omnivaRepository,
         private OmnivaService $omnivaService
@@ -31,7 +30,7 @@ class OmnivaController extends AbstractController
         [
             $postMachines,
             $filter
-        ] = $this->omnivaService->getPostMachines();
+        ] = $this->omnivaService->getPostMachines($request);
 
         $filterForm = $this->createForm(FilterType::class);
         $filterForm->handleRequest($request);
@@ -50,8 +49,10 @@ class OmnivaController extends AbstractController
     ): Response {
         $postMachine = $this->omnivaRepository->findOneBy(['id' => $id]);
 
-        $postMachineForm = $this->createForm(PostMachineType::class,
-            $postMachine);
+        $postMachineForm = $this->createForm(
+            PostMachineType::class,
+            $postMachine
+        );
         $postMachineForm->handleRequest($request);
 
         return $this->render('show_post_machine.html.twig', [
@@ -61,17 +62,22 @@ class OmnivaController extends AbstractController
     }
 
     #[Route('/post-machines/export', name: 'post_machines_export')]
-    public function exportSelectedPostMachines(Factory $factory, LoggerInterface $logger): Response
-    {
-        [$postMachines] = $this->omnivaService->getPostMachines();
+    public function exportSelectedPostMachines(
+        Factory $factory,
+        LoggerInterface $logger,
+        Request $request
+    ): Response {
+        [$postMachines] = $this->omnivaService->getPostMachines($request);
 
         try {
             $spreadsheet = $this->omnivaService->prepareSpreadsheet($postMachines);
 
             $response = $factory->createStreamedResponse($spreadsheet, 'Xls');
             $response->headers->set('Content-Type', 'application/vnd.ms-excel');
-            $response->headers->set('Content-Disposition',
-                'attachment;filename="Pastomatu_sarasas.xls"');
+            $response->headers->set(
+                'Content-Disposition',
+                'attachment;filename="Pastomatu_sarasas.xls"'
+            );
             $response->headers->set('Cache-Control', 'max-age=0');
 
             return $response;
