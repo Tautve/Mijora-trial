@@ -18,6 +18,6 @@ yarn encore dev
 ###For tests
 
 1. Create ``.env.test.local`` file and fill in missing parameters
-2. bin/console doctrine:database:create --env=test
-3. bin/console doctrine:migrations:migrate --env=test
+2. ```bin/console doctrine:database:create --env=test```
+3. ```bin/console doctrine:migrations:migrate --env=test```
 4. run tests: ```./vendor/bin/phpunit```
